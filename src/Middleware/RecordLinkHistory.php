@@ -18,7 +18,7 @@ class RecordLinkHistory
     public function handle(Request $request, Closure $next)
     {
         $links = session()->has(LinkTrackingHistory::sessionId()) ? session(LinkTrackingHistory::sessionId()) : [];
-        $currentLink = request()->path(); // Getting current URI like 'category/books/'
+        $currentLink = request()->fullUrl(); // Getting current URI like 'category/books/'
         array_unshift($links, $currentLink); // Putting it in the beginning of links array
         session([LinkTrackingHistory::sessionId() => $links]); // Saving links array to the session
 
